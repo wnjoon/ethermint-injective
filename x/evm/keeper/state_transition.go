@@ -333,7 +333,7 @@ func (k *Keeper) ApplyMessageWithConfig(
 	var evm *vm.EVM
 	if cfg.Overrides != nil {
 		if err := cfg.Overrides.Apply(stateDB); err != nil {
-			return nil, errorsmod.Wrap(err, "failed to apply state override")
+			return nil, errorsmod.Wrap(types.ErrConfigOverrides, err.Error())
 		}
 	}
 	evm = k.NewEVM(ctx, msg, cfg, stateDB)
